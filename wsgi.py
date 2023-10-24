@@ -1,11 +1,16 @@
 # wsgi.py
 # pylint: disable=missing-docstring
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from longest_word.game import Game
-import requests
+
 
 app = Flask(__name__)
+
+@app.route('/')
+def home():
+    game = Game()
+    return render_template('home.html', grid=game.grid)
 
 @app.route('/check', methods=["POST"])
 def check():
